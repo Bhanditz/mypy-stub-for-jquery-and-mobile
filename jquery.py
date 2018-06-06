@@ -8,6 +8,7 @@
 from typing import Any, Dict, Callable, Optional, Text, Union
 
 # __pragma__("skip")
+from stub_firefox import _console  # stub
 from jQuery import Deffered, Element, Event, jQuery  # stub
 
 if False:
@@ -16,6 +17,7 @@ if False:
     Any, Callable, Dict, Optional, Text, Union
 # __pragma__("noskip")
 # __pragma__("alias", "jQuery", "$")
+# __pragma__("alias", "_console", "console")
 
 
 def jq(sel, ctx=None):  # {{{1
@@ -31,7 +33,7 @@ def ajax(dct):  # {{{1
 
 
 def parseHTML(src):  # {{{1
-    # type: (Text) -> jQuery
+    # type: (Text) -> Element
     return jQuery.parseHTML(src)
 
 
@@ -43,5 +45,8 @@ def dummy_event():  # {{{1
 def on_load(fn):  # {{{1
     # type: (Callable[[Event], bool]) -> None
     jQuery(fn)
+
+
+debg = _console.debug
 
 # vi: ft=python:et:ts=4:fdm=marker:nowrap

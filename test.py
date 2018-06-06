@@ -17,7 +17,7 @@ if False:
 
 def on_click(ev):  # {{{1
     # type: (jquery.Event) -> bool
-    jquery.ajax({"url": "http://www.google.com/",
+    jquery.ajax({"url": "http://localhost:8000/test-ajax-src.html",
                  "timeout": 1000}) \
           .then(ajax_load, ajax_fail)
     return False
@@ -25,10 +25,13 @@ def on_click(ev):  # {{{1
 
 def ajax_load(_dat):  # {{{1
     # type: (Text) -> None
+    jquery.debg("ajax")
     dom = jquery.parseHTML(_dat)
+    seq = jquery.jq(dom).filter("div")  # selector and find() not worked.
 
     sel = jquery.jq("#sel")
-    for _div in jquery.jq("div", dom):
+    for _div in seq:
+        jquery.debg("loop")
         div = jquery.jq(_div)
         sel.append('<option value="{}">{}</option>'.format(
                    div.attr("id"), div.text()))

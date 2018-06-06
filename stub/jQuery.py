@@ -41,12 +41,16 @@ class jQuery(Iterable):  # {{{1
 
     @classmethod
     def parseHTML(cls, src):  # {{{1
-        # type: (Text) -> 'jQuery'
+        # type: (Text) -> Element
         pass
 
     def __iter__(self):  # {{{1
         # type: () -> Iterator[Element]
         pass
+
+    def filter(self, sel):  # {{{1
+        # type: (Text) -> 'jQuery'
+        return jQuery("")  # just indicate new object...
 
     def append(self, src):  # {{{1
         # type: (Text) -> 'jQuery'
