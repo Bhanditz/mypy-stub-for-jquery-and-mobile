@@ -2,3 +2,4 @@
 .mypy_cache
 __javascript__
 venv
+jquery*.js
