@@ -7,6 +7,8 @@
 #
 from typing import Any, Callable, Dict, Iterable, Iterator, Text, Union
 
+from stub_firefox import Element, Event
+
 
 Any, Callable, Dict, Iterable, Iterator, Text, Union
 
@@ -15,14 +17,6 @@ class Deffered(object):  # {{{1
     def then(self, fn1, fn2):  # {{{1
         # type: (Callable[[Text], None], Callable[[], None]) -> 'Deffered'
         pass
-
-
-class Element(object):  # {{{1
-    pass
-
-
-class Event(object):  # {{{1
-    pass
 
 
 class jQuery(Iterable):  # {{{1

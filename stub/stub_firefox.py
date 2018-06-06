@@ -21,4 +21,13 @@ class _console(object):  # {{{1
         # type: (Text, Any) -> None
         pass
 
+
+class Element(object):  # {{{1
+    pass
+
+
+class Event(object):  # {{{1
+    pass
+
+
 # vi: ft=python
