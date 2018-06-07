@@ -21,13 +21,36 @@ class _console(object):  # {{{1
         # type: (Text, Any) -> None
         pass
 
+    @classmethod
+    def error(cls, msg, *arg):  # cls {{{1
+        # type: (Text, Any) -> None
+        pass
+
+    @classmethod
+    def info(cls, msg, *arg):  # cls {{{1
+        # type: (Text, Any) -> None
+        pass
+
+    @classmethod
+    def warn(cls, msg, *arg):  # cls {{{1
+        # type: (Text, Any) -> None
+        pass
+
 
 class Element(object):  # {{{1
     pass
 
 
+class SelectTag(Element):  # {{{1
+    def __init__(self):
+        # type: () -> None
+        self.selectedIndex = 0
+
+
 class Event(object):  # {{{1
-    pass
+    def __init__(self):  # {{{1
+        # type: () -> None
+        self.target = Element()
 
 
 # vi: ft=python
