@@ -6,7 +6,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 from typing import (Any, Callable, Dict, Iterable, Iterator,
-                    Optional, Sized, Text, Union, )
+                    Optional, Sized, Text, Union, overload)
 
 from stub_firefox import Element, Event
 
@@ -15,10 +15,14 @@ Any, Callable, Dict, Iterable, Iterator, Optional, Sized, Text, Union
 Element, Event
 
 
+class jqXHR(object):  # {{{1
+    ...  # {{{1
+
+
 class Deffered(object):  # {{{1
     def then(self,  # {{{1
-             fn1,  # type: Callable[[Text], None]
-             fn2=None  # type: Optional[Callable[[], None]]
+             fn1,  # type: Callable[[Text, Text, jqXHR], bool]
+             fn2=None  # type: Optional[Callable[[jqXHR, Text, Text], bool]]
              ):  # typ
         # type: (...) -> 'Deffered'
         pass
@@ -31,6 +35,7 @@ class Pickadate(object):  # {{{1
 
 
 class jQuery(Iterable, Sized):  # {{{1
+    # {{{1
     def __init__(
         self,
         selector,     # type: Union[Text, Element, Callable[[Event], bool]]
@@ -85,27 +90,61 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: (Text) -> 'jQuery'
         return self
 
-    def attr(self, name, *arg, **kw):  # {{{1
-        # type: (Text, Text, Dict[Text, Any]) -> Union[Text, 'jQuery']
+    def clone(self, fWithDataAndEvents):  # {{{1
+        # type: (bool) -> 'jQuery'
+        ...
+
+    def prepend(self, src):  # {{{1
+        # type: (Union[Text, 'jQuery']) -> 'jQuery'
         return self
 
-    def prop(self, name, *arg):  # {{{1
-        # type: (Text, Text) -> Union[Text, 'jQuery']
+    # attr(self, name, *arg, **kw):  # {{{1
+    @overload
+    def attr(self, name, arg):
+        # type: (Text, Text) -> 'jQuery'
+        ...
+
+    @overload
+    def attr(self, name):
+        # type: (Text) -> Text
+        ...
+
+    # prop(self, name, *arg):  # {{{1
+    @overload
+    def prop(self, name, val):
+        # type: (Text, Union[Text, float]) -> 'jQuery'
         return self
+
+    @overload
+    def prop(self, name):
+        # type: (Text) -> Text
+        return ""
 
     def css(self, dat):  # {{{1
         # type: (Dict[Text, Text]) -> 'jQuery'
         return self
 
-    def text(self, *arg, **kw):  # {{{1
-        # type: (Text, Dict[Text, Any]) -> Union[Text, 'jQuery']
-        return self
+    # text {{{1
+    @overload
+    def text(self):
+        # type: () -> Text
+        ...
 
-    def val(self, *arg):  # {{{1
-        # type: (Union[bool, float, Text]) -> Union[Text, 'jQuery']
-        return ""
+    @overload
+    def text(self, arg):
+        # type: (Text) -> 'jQuery'
+        ...
 
-    def off(self, name):  # {{{1
+    # val {{{1
+    @overload
+    def val(self,
+            arg: Union[Text, float, bool]
+            ) -> 'jQuery': ...
+
+    @overload
+    def val(self) -> Text: ...
+
+    def off(self, *name):  # {{{1
         # type: (Text) -> 'jQuery'
         return self
 
@@ -113,9 +152,16 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: (Text, Callable[[Event], Optional[bool]]) -> 'jQuery'
         return self
 
-    def remove(self):  # {{{1
+    # remove {{{1
+    @overload
+    def remove(self):
         # type: () -> None
-        pass
+        ...
+
+    @overload
+    def remove(self, sel):
+        # type: (Text) -> None
+        ...
 
     def width(self):  # {{{1
         # type: () -> float
@@ -124,6 +170,10 @@ class jQuery(Iterable, Sized):  # {{{1
     def height(self):  # {{{1
         # type: () -> float
         return 0.0
+
+    def select(self):  # {{{1
+        # type: () -> 'jQuery'
+        return self
 
     def serialize(self):  # {{{1
         # type: () -> Text
