@@ -10,8 +10,11 @@ from typing import Text
 import jquery
 
 # __pragma__("skip")
+from jQuery import jqXHR
+
 if False:
     Text
+    jqXHR
 # __pragma__("noskip")
 
 
@@ -23,8 +26,8 @@ def on_click(ev):  # {{{1
     return False
 
 
-def ajax_load(_dat):  # {{{1
-    # type: (Text) -> None
+def ajax_load(_dat, stat, xhr):  # {{{1
+    # type: (Text, Text, jqXHR) -> bool
     jquery.debg("ajax")
     dom = jquery.parseHTML(_dat)
     seq = jquery.jq(dom).filter("div")  # selector and find() not worked.
@@ -35,6 +38,7 @@ def ajax_load(_dat):  # {{{1
         div = jquery.jq(_div)
         sel.append('<option value="{}">{}</option>'.format(
                    div.attr("id"), div.text()))
+    return True
 
 
 def ajax_fail():  # {{{1

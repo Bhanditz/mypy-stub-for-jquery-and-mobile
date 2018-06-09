@@ -8,8 +8,8 @@
 from typing import Any, Dict, Callable, Optional, Text, Union
 
 # __pragma__("skip")
-from stub_firefox import _console  # stub
-from jQuery import Deffered, Element, Event, jQuery  # stub
+from stub_firefox import Element, Event, console  # stub
+from jQuery import Deffered, jQuery  # stub
 
 if False:
     _jq = Any
@@ -17,7 +17,6 @@ if False:
     Any, Callable, Dict, Optional, Text, Union
 # __pragma__("noskip")
 # __pragma__("alias", "jQuery", "$")
-# __pragma__("alias", "_console", "console")
 
 
 def jq(sel, ctx=None):  # {{{1
@@ -47,6 +46,6 @@ def on_load(fn):  # {{{1
     jQuery(fn)
 
 
-debg = _console.debug
+debg = console.debug
 
 # vi: ft=python:et:ts=4:fdm=marker:nowrap
