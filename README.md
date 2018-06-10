@@ -20,6 +20,15 @@ mypy can't detect the problem with jQuery.
 Finally, I wrote the jQuery and browser stubs for mypy
 in my applications for more smoothly development.
 
+| term          | version |
+|:-------------:|:-------:|
+| mypy          | 0.530   |
+| transcrypt    | 3.6.50  |
+| jQuery        | 1.8.3   |
+| jQuery Mobile | 1.4.5   |
+| d3.js         | 3.4.13  |
+| browser       | Firefox 60.0.1 |
+
 
 Demonstration
 ----------------------
@@ -43,8 +52,48 @@ Demonstration
 or, edit test.py with vim ALE plugin.
 
 
+How to use
+----------------------
+### enable stub path before run mypy
+
+```
+    $ export MYPYPATH=stub
+```
+
+### do not affect stub in transcrypt
+
+```python
+    # __pragma__("skip")
+    from stub_firefox import location  # apply type information
+    # __pragma__("noskip")
+
+    # translate location(python-stub) to location(javascript globals).
+    location.href = "http://github.com/"
+```
+
+if you don't like this hack, you can do more clear way.
+
+```python
+    from stub_firefox import location as _location # apply type information
+
+    # translate location(python-stub) to location(javascript globals).
+    # __pragma__("alias", "_location", "location")
+    location.href = "http://github.com/"
+```
+
+
 Transcrypt K/H
 ----------------------
+### can't use `*` function
+- There are a lot of functions in javascript world, I did not
+    prepare all of these.
+- please pull your requests.
+
+
+### can't use `bind` / `unbind` / `click` functions.
+- it is not supported, use `on()` or `off()`.
+
+
 ### can't use 'python yield' = 'javascript-Generator'
 
 ```
@@ -82,5 +131,10 @@ transcrypt was made for wide development and consider the compativility
 problems and `for let ... of` statement will not be converted in current
 version 3.6.50.
 
+
+TODO
+----------------------
+- split branch to support jQuery 1.8, 2.10, 3.3...
+- split module jQuery, jQueryMobile, Pickadate
 
 .. vi: ft=markdown

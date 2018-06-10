@@ -82,23 +82,38 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: (Text) -> 'jQuery'
         return jQuery("")  # just indicate new object...
 
+    def parent(self):  # {{{1
+        # type: () -> 'jQuery'
+        return jQuery("")  # just indicate new object...
+
     def addClass(self, classes):  # {{{1
         # type: (Text) -> 'jQuery'
         return self
 
-    def append(self, src):  # {{{1
+    def removeClass(self, classes):  # {{{1
         # type: (Text) -> 'jQuery'
         return self
 
-    def clone(self, fWithDataAndEvents):  # {{{1
+    def append(self, src):  # {{{1
+        # type: (Union[Text, 'jQuery']) -> 'jQuery'
+        return self
+
+    # clone(self, fWithDataAndEvents):  # {{{1
+    @overload
+    def clone(self, fWithDataAndEvents):
         # type: (bool) -> 'jQuery'
+        ...
+
+    @overload
+    def clone(self):  # {{{1
+        # type: () -> 'jQuery'
         ...
 
     def prepend(self, src):  # {{{1
         # type: (Union[Text, 'jQuery']) -> 'jQuery'
         return self
 
-    # attr(self, name, *arg, **kw):  # {{{1
+    # attr # {{{1
     @overload
     def attr(self, name, arg):
         # type: (Text, Text) -> 'jQuery'
@@ -109,10 +124,20 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: (Text) -> Text
         ...
 
-    # prop(self, name, *arg):  # {{{1
+    @overload
+    def attr(self, sets):
+        # type: (Dict[Text, Union[Text, bool]]) -> 'jQuery'
+        ...
+
+    # prop # {{{1
     @overload
     def prop(self, name, val):
-        # type: (Text, Union[Text, float]) -> 'jQuery'
+        # type: (Text, Union[Text, float, bool]) -> 'jQuery'
+        return self
+
+    @overload
+    def prop(self, sets):
+        # type: (Dict[Text, Union[Text, bool]]) -> 'jQuery'
         return self
 
     @overload
@@ -163,6 +188,10 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: (Text) -> None
         ...
 
+    def empty(self):  # {{{1
+        # type: () -> 'jQuery'
+        ...
+
     def width(self):  # {{{1
         # type: () -> float
         return 0.0
@@ -179,8 +208,8 @@ class jQuery(Iterable, Sized):  # {{{1
         # type: () -> Text
         pass
 
-    def submit(self):  # {{{1
-        # type: () -> None
+    def submit(self, *fn):  # {{{1
+        # type: (Callable[[], bool]) -> None
         pass
 
     def fadeIn(self, mode):  # {{{1
@@ -189,6 +218,10 @@ class jQuery(Iterable, Sized):  # {{{1
 
     def fadeOut(self, mode):  # {{{1
         # type: (Text) -> 'jQuery'
+        pass
+
+    def toggle(self, speed):  # {{{1
+        # type: (float) -> 'jQuery'
         pass
 
     def focus(self, *arg):  # {{{1
@@ -208,6 +241,10 @@ class jQuery(Iterable, Sized):  # {{{1
         return self
 
     def selectmenu(self, cmd):  # {{{1
+        # type: (Text) -> 'jQuery'
+        return self
+
+    def checkboxradio(self, cmd):  # {{{1
         # type: (Text) -> 'jQuery'
         return self
 
