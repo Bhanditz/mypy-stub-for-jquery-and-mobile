@@ -86,21 +86,45 @@ class D3obj(object):  # {{{1
         ...   # split to D3arc
 
 
+class D3Option(object):  # {{{1
+    def enabled(self, onoff):  # {{{1
+        # type: (bool) -> 'D3Option'
+        ...
+
+
 class D3Point(object):  # {{{1
     def __init__(self):  # {{{1
         # type: () -> None
+        self.x = ...  # type: JsPrims
         self.value = ...  # type: JsPrims
         self.data = ...  # type: Dict[Text, JsPrims]
+
+    def __getitem__(self, idx):  # {{{1
+        # type: (int) -> JsPrims
+        # for d[0], d[1] pattern.
+        ...
 
 
 class D3Axis(object):  # {{{1
     def tickFormat(self, fn):  # {{{1
-        # type: (Callable[[D3Point], Text]) -> 'D3Axis'
+        # type: (Callable[[JsPrims], Text]) -> 'D3Axis'
         ...
 
 
 class D3Chart(object):  # {{{1
+    def color(self, seq):  # {{{1
+        # type: (D3Ordinal) -> 'D3Chart'
+        ...
+
     def value(self, fn):  # {{{1
+        # type: (Callable[[D3Point], JsPrims]) -> 'D3Chart'
+        ...
+
+    def x(self, fn):  # {{{1
+        # type: (Callable[[D3Point], JsPrims]) -> 'D3Chart'
+        ...
+
+    def y(self, fn):  # {{{1
         # type: (Callable[[D3Point], JsPrims]) -> 'D3Chart'
         ...
 
@@ -116,6 +140,50 @@ class D3Chart(object):  # {{{1
 
     def __call__(self, dat):  # {{{1
         # type: (List[Dict[Text, Any]]) -> List[Dict[Text, Any]]
+        ...
+
+    # nvd3 {{{1
+    def update(self):  # prop {{{1
+        # type: () -> bool
+        ...
+
+    # multiBarChart {{{1
+    def stacked(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
+        ...
+
+    def reduceXTicks(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
+        ...
+
+    def showControls(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
+        ...
+
+    def groupSpacing(self, spc):  # {{{1
+        # type: (float) -> 'D3Chart'
+        ...
+
+    @property
+    def tooltip(self):  # {{{1
+        # type: () -> 'D3Option'
+        ...
+
+    # descreteBarChart {{{1
+    def staggerLabels(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
+        ...
+
+    def showValues(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
+        ...
+
+    def duration(self, msec):  # {{{1
+        # type: (int) -> 'D3Chart'
+        ...
+
+    def tooltips(self, enabled):  # {{{1
+        # type: (bool) -> 'D3Chart'
         ...
 
 
@@ -173,7 +241,7 @@ def csv(url,  # type: Text  # {{{1
 
 
 def format(src):  # {{{1
-    # type: (Text) -> Callable[[D3Point], Text]
+    # type: (Text) -> Callable[[JsPrims], Text]
     ...
 
 
